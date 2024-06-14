@@ -6,12 +6,15 @@ import {Box, Button, Pagination, Stack, Typography,
 } from "@mui/material";
 import { NextPage } from "next";
 import { useState } from "react";
+import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 
 const PropertyList: NextPage = () => {
-  console.log("PropertyList COMPONENT - PAGES ROUTER");
-
+  const device = useDeviceDetect();
   const [properties, setProperties] = useState<number[]>([1, 2, 3, 4, 5, 6]);
 
+  if(device === "mobile") {
+    return <Stack>PROPERTYLIST MOBILE</Stack>
+  } else {
   return (
     <div id={"property-list-page"} style={{ position: "relative" }}>
       <Stack className="container">
@@ -53,5 +56,6 @@ const PropertyList: NextPage = () => {
       </Stack>
     </div>
   );
+};
 };
 export default withLayoutBasic(PropertyList);
